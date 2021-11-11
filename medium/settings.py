@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders', 
     'drf_yasg', # swagger UI
     'django_filters',
+    'users',
 ]
 
 MIDDLEWARE = [
