@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+from datetime import timedelta
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'reviews',
     'corsheaders', 
     'drf_yasg', # swagger UI
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -72,26 +76,34 @@ TEMPLATES = [
     },
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_ALL_ORIGINS = False # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    'https://flash-cards-rest-api.herokuapp.com',
+    # 'https://flash-cards-rest-api.herokuapp.com',
 ]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     'www.test-cors.org',
+# ]
 
 
 WSGI_APPLICATION = 'medium.wsgi.application'
 
 
-# rest_framework
-# REST_FRAMEWORK = {
-#     'DEFAULT_FILTER_BACKENDS': [
-#         'django_filters.rest_framework.DjangoFilterBackend'
-#     ],
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ],
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15), # 15 days
+    'ROTATE_REFRESH_TOKENS': True, # If True, the refresh token will be rotated every time the user logs in
+}
 
 
 # Database

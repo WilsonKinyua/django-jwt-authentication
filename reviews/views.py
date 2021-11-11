@@ -9,11 +9,16 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 
+# jwt
+from rest_framework.permissions import IsAuthenticated
+
 
 class ProductViewSet(ReadOnlyModelViewSet):
 
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+    
+    permission_classes = [IsAuthenticated] # jwt
     
     # add product 
     @action(detail=False, methods=['post'])
