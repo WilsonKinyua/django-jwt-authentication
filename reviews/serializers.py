@@ -8,12 +8,12 @@ from django.utils.timezone import now
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['pk', 'name']
+        fields = ['id', 'name']
 
 
 class ProductSerializer(serializers.ModelSerializer):
 
-    category = CategorySerializer(Many=True)
+    category = CategorySerializer(many=True)
 
     class Meta:
         model = Product
