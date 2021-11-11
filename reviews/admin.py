@@ -3,7 +3,13 @@ from .models import Product, Category, Company, ProductSize, ProductSite, Commen
 from django.contrib.auth.models import Group
 
 
-admin.site.register(Product)
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('pk','name', 'content','created', 'updated')
+    list_filter = ('name','created', 'updated')
+
+
+# admin.site.register(Product)
 admin.site.register(Category)
 admin.site.register(Company)
 admin.site.register(ProductSize)
