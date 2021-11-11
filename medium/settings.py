@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
+
 
 from datetime import timedelta
 
@@ -42,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'reviews',
-    'corsheaders', 
-    'drf_yasg', # swagger UI
+    'corsheaders',
+    'drf_yasg',  # swagger UI
     'django_filters',
     'users',
 ]
@@ -77,7 +79,8 @@ TEMPLATES = [
     },
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+# If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
@@ -102,8 +105,9 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=15), # 15 days
-    'ROTATE_REFRESH_TOKENS': True, # If True, the refresh token will be rotated every time the user logs in
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),  # 15 days
+    # If True, the refresh token will be rotated every time the user logs in
+    'ROTATE_REFRESH_TOKENS': True,
 }
 
 
@@ -160,3 +164,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# ================================================
+
+# sendgrid
+SENDGRID_API_KEY = config('SENDGRID_API_KEY')
